@@ -5,6 +5,7 @@
 #include "RenderWindow.h"
 #include "Entity.h"
 #include "Events.h"
+#include "TextureWrapper.h"
 int main(int argv, char* args[])
 {
 	if(SDL_Init(SDL_INIT_VIDEO) > 0)
@@ -21,7 +22,7 @@ int main(int argv, char* args[])
     EventHandling EventHandler(&Game);
 
 
-    SDL_Texture * Quote = Game.loadTexture("res/Images/Quote.png");
+    TextureWrapper  Quote(Game.loadTexture("res/Images/Quote.png"),0,0,32,32);
     SDL_Texture * TileSheet = Game.loadTexture("res/Images/tileset.png");
     std::vector<Entity>Entities;
     for(int y = 0; y < 15; y++)
@@ -30,8 +31,8 @@ int main(int argv, char* args[])
         {
             for(int x = 0; x < 20; x++)
             {
-                Entity quote(x * 32, y*32, TileSheet);
-                Entities.push_back(quote);
+               // Entity quote(x * 32, y*32, TileSheet);
+              //  Entities.push_back(quote);
             }
         }
     }
@@ -41,8 +42,8 @@ int main(int argv, char* args[])
         //event handler
         EventHandler.handleEvents();
         Game.clear();
-        for(auto & entity : Entities)
-            Game.render(entity);
+        //for(auto & entity : Entities)
+        Game.render(Quote);
         Game.display();
 
 

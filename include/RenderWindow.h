@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 //header file for class that handles Render Window
-#include "Entity.h"
+#include "TextureWrapper.h"
 class RenderWindow
 {
 public:
@@ -13,7 +13,7 @@ public:
     void clear();
 
 //draws an entity to the screen
-    void render(Entity &p_entity);
+    void render(TextureWrapper& p_Texture);
 
 //swaps the GL buffers to update the screen
     void display();
@@ -36,12 +36,6 @@ private:
 
     }
 
-    float calculatePillarBox(float p_Wres, float p_Hres)
-    {
-
-
-
-    }
 
 
     uint32_t m_timer1;

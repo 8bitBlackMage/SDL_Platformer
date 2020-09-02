@@ -41,11 +41,27 @@ void RenderWindow::clear() {
 
 }
 
-void RenderWindow::render(Entity &p_entity) {
+void RenderWindow::render(TextureWrapper &p_Texture)
+{
+switch(p_Texture.kRenderType)
+{
+    case(SingleTexture):
+    {
+        SDL_RenderCopy(m_Render,
+                       p_Texture.TexturePtr,
+                       nullptr,
+                       &p_Texture.destRect);
+        break;
+    }
+    case(MultiTexture):
+    {
+        break;
+    }
+    default:
+    SDL_assert( true);
 
-    SDL_Rect DestRect{ (int)p_entity.getXpos() , (int)p_entity.getYpos(),32,32};
-    SDL_Rect SrcRect {0,64,32,32};
-SDL_RenderCopy(m_Render,p_entity.getTexture(),&SrcRect , &DestRect);
+}
+
 }
 
 void RenderWindow::display() {
