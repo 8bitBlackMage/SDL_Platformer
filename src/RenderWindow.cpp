@@ -5,13 +5,13 @@
 
 RenderWindow::RenderWindow(const char* p_title, int p_width, int p_height):m_Window(nullptr),m_Render(nullptr)
 {
- 	m_Window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_width, p_height, SDL_WINDOW_SHOWN);
+ 	m_Window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_width, p_height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
  	if(m_Window == nullptr)
  	{
  		std::cout <<"window has failed to init Error:" << SDL_GetError() << std::endl;
  	}
  	m_Render = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED);
-    m_renderTexture = SDL_CreateTexture(m_Render, SDL_PIXELFORMAT_RGBA8888,  SDL_TEXTUREACCESS_TARGET, 640,480);
+    m_renderTexture = SDL_CreateTexture(m_Render, SDL_PIXELFORMAT_UNKNOWN,  SDL_TEXTUREACCESS_TARGET, 640,480);
 }
 
 
@@ -43,8 +43,9 @@ void RenderWindow::clear() {
 
 void RenderWindow::render(Entity &p_entity) {
 
-    SDL_Rect DestRect{ (int)p_entity.getXpos() , (int)p_entity.getYpos(),64,64};
-SDL_RenderCopy(m_Render,p_entity.getTexture(), nullptr, &DestRect);
+    SDL_Rect DestRect{ (int)p_entity.getXpos() , (int)p_entity.getYpos(),32,32};
+    SDL_Rect SrcRect {0,64,32,32};
+SDL_RenderCopy(m_Render,p_entity.getTexture(),&SrcRect , &DestRect);
 }
 
 void RenderWindow::display() {

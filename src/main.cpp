@@ -22,6 +22,7 @@ int main(int argv, char* args[])
 
 
     SDL_Texture * Quote = Game.loadTexture("res/Images/Quote.png");
+    SDL_Texture * TileSheet = Game.loadTexture("res/Images/tileset.png");
     std::vector<Entity>Entities;
     for(int y = 0; y < 15; y++)
     {
@@ -29,7 +30,7 @@ int main(int argv, char* args[])
         {
             for(int x = 0; x < 20; x++)
             {
-                Entity quote(x * 32, y*32, Quote);
+                Entity quote(x * 32, y*32, TileSheet);
                 Entities.push_back(quote);
             }
         }
